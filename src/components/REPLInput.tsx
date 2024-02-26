@@ -6,18 +6,23 @@ interface REPLInputProps{
   // TODO: Fill this with desired props... Maybe something to keep track of the submitted commands
   stringArray: string[],
   setStringArray: Dispatch<SetStateAction<string[]>>
+  setBrief: Dispatch<SetStateAction<boolean>>
 }
 // You can use a custom interface or explicit fields or both! An alternative to the current function header might be:
 // REPLInput(history: string[], setHistory: Dispatch<SetStateAction<string[]>>)
 export function REPLInput(props : REPLInputProps) {
     // Remember: let React manage state in your webapp. 
     // Manages the contents of the input box
-    const [commandString, setCommandString] = useState<string>('');
-  const [count, setCount] = useState(0);
+  const [commandString, setCommandString] = useState<string>('');
                                                                                                                                 
   // TODO WITH TA: build a handleSubmit function called in button onClick
   function handleSubmit(commandString: string) {
-    setCount(count + 1);
+    if (commandString === "brief") {
+      props.setBrief(true)
+    }
+    if (commandString === "verbose") {
+      props.setBrief(false)
+    }
     props.setStringArray([...props.stringArray, commandString]);
     setCommandString('');
   }
@@ -40,7 +45,7 @@ export function REPLInput(props : REPLInputProps) {
             {/* TODO WITH TA: Build a handleSubmit function that increments count and displays the text in the button */}
             {/* TODO: Currently this button just counts up, can we make it push the contents of the input box to the history?*/}
         <button onClick={() => handleSubmit(commandString)}>
-          Submitted {count} times
+          Submit
         </button>
         </div>
     );
