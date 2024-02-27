@@ -4,9 +4,10 @@ import { ControlledInput } from './ControlledInput';
 
 interface REPLInputProps{
   // TODO: Fill this with desired props... Maybe something to keep track of the submitted commands
-  stringArray: string[],
-  setStringArray: Dispatch<SetStateAction<string[]>>
-  setBrief: Dispatch<SetStateAction<boolean>>
+  history: string[],
+  setHistory: Dispatch<SetStateAction<string[]>>
+  briefMode: boolean
+  setBriefMode: Dispatch<SetStateAction<boolean>>
 }
 // You can use a custom interface or explicit fields or both! An alternative to the current function header might be:
 // REPLInput(history: string[], setHistory: Dispatch<SetStateAction<string[]>>)
@@ -17,13 +18,10 @@ export function REPLInput(props : REPLInputProps) {
                                                                                                                                 
   // TODO WITH TA: build a handleSubmit function called in button onClick
   function handleSubmit(commandString: string) {
-    if (commandString === "brief") {
-      props.setBrief(true)
+    if (commandString === "mode") {
+      props.setBriefMode(!props.briefMode)
     }
-    if (commandString === "verbose") {
-      props.setBrief(false)
-    }
-    props.setStringArray([...props.stringArray, commandString]);
+    props.setHistory([...props.history, commandString]);
     setCommandString('');
   }
     // TODO: Once it increments, try to make it push commands... Note that you can use the `...` spread syntax to copy what was there before
