@@ -1,11 +1,12 @@
 import '../styles/main.css';
 import { Dispatch, SetStateAction, useState} from 'react';
 import { ControlledInput } from './ControlledInput';
+import { CommandMap } from '../commands/commandMap';
 
 interface REPLInputProps{
   // TODO: Fill this with desired props... Maybe something to keep track of the submitted commands
-  history: string[],
-  setHistory: Dispatch<SetStateAction<string[]>>
+  history: (string | string[][])[][],
+  setHistory: Dispatch<SetStateAction<(string | string[][])[][]>>
   briefMode: boolean
   setBriefMode: Dispatch<SetStateAction<boolean>>
 }
@@ -15,13 +16,17 @@ export function REPLInput(props : REPLInputProps) {
     // Remember: let React manage state in your webapp. 
     // Manages the contents of the input box
   const [commandString, setCommandString] = useState<string>('');
+  const commandMap = new CommandMap();
+  commandMap.addDefaultCommands();
                                                                                                                                 
   // TODO WITH TA: build a handleSubmit function called in button onClick
   function handleSubmit(commandString: string) {
-    if (commandString === "mode") {
-      props.setBriefMode(!props.briefMode)
+    let strArray: string[] = commandString.split(' ');
+    if (commandMap.getCommand(strArray[0]) != null) {
+      props.setHistory([...props.history, [commandString, commandMap.getCommand(strArray[0])(strArray.slice(1), props.briefMode, props.setBriefMode)]]);
+    } else {
+      props.setHistory([...props.history, [commandString, "Command not recognized"]]);
     }
-    props.setHistory([...props.history, commandString]);
     setCommandString('');
   }
     // TODO: Once it increments, try to make it push commands... Note that you can use the `...` spread syntax to copy what was there before
@@ -32,18 +37,13 @@ export function REPLInput(props : REPLInputProps) {
      */
     return (
         <div className="repl-input">
-            {/* This is a comment within the JSX. Notice that it's a TypeScript comment wrapped in
-            braces, so that React knows it should be interpreted as TypeScript */}
-            {/* I opted to use this HTML tag; you don't need to. It structures multiple input fields
-            into a single unit, which makes it easier for screenreaders to navigate. */}
             <fieldset>
               <legend>Enter a command:</legend>
           <ControlledInput value={commandString} setValue={setCommandString} ariaLabel={"Command input"}/>
             </fieldset>
-            {/* TODO WITH TA: Build a handleSubmit function that increments count and displays the text in the button */}
-            {/* TODO: Currently this button just counts up, can we make it push the contents of the input box to the history?*/}
-        <button onClick={() => handleSubmit(commandString)}>
-          Submit
+        
+          <button onClick={() => handleSubmit(commandString)}>
+            Submit
         </button>
         </div>
     );
