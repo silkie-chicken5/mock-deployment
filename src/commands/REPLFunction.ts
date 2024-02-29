@@ -12,6 +12,8 @@ import { MockedDataMap } from './MockedDataMap';
 export interface REPLFunction {    
     (args: Array<string>,
         fileMap: MockedDataMap,
+        loadedFile: string[][],
+        setLoadedFile: Dispatch<SetStateAction<(string[][])>>,
         briefMode: boolean,
         setBriefMode: Dispatch<SetStateAction<boolean>>): string | string[][];
 }

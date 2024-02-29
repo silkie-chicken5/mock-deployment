@@ -17,6 +17,7 @@ export function REPLInput(props : REPLInputProps) {
     // Remember: let React manage state in your webapp. 
     // Manages the contents of the input box
   const [commandString, setCommandString] = useState<string>('');
+  const [loadedFile, setLoadedFile] = useState< (string[][]) >([]);
   const commandMap = new CommandMap();
   commandMap.addDefaultCommands();
   const fileMap = new MockedDataMap();
@@ -27,7 +28,7 @@ export function REPLInput(props : REPLInputProps) {
   function handleSubmit(commandString: string) {
     let strArray: string[] = commandString.split(' ');
     if (commandMap.getCommand(strArray[0]) != null) {
-      props.setHistory([...props.history, [commandString, commandMap.getCommand(strArray[0])(strArray.slice(1), fileMap, props.briefMode, props.setBriefMode)]]);
+      props.setHistory([...props.history, [commandString, commandMap.getCommand(strArray[0])(strArray.slice(1), fileMap, loadedFile, setLoadedFile, props.briefMode, props.setBriefMode)]]);
     } else {
       props.setHistory([...props.history, [commandString, "Command not recognized"]]);
     }
