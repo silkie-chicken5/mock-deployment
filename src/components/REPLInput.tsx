@@ -1,7 +1,7 @@
 import '../styles/main.css';
 import { Dispatch, SetStateAction, useState} from 'react';
 import { ControlledInput } from './ControlledInput';
-import { CommandMap } from '../commands/commandMap';
+import { CommandMap } from '../commands/CommandMap';
 
 interface REPLInputProps{
   // TODO: Fill this with desired props... Maybe something to keep track of the submitted commands
