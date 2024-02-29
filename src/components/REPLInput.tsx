@@ -23,7 +23,7 @@ export function REPLInput(props : REPLInputProps) {
   const fileMap = new MockedDataMap();
   fileMap.addDefaultFiles();
   // console.log(fileMap.getFile('simpleData'))
-                                                                                                                                
+  
   // TODO WITH TA: build a handleSubmit function called in button onClick
   function handleSubmit(commandString: string) {
     let strArray: string[] = commandString.split(' ');
