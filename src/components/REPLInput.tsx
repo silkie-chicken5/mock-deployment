@@ -2,6 +2,7 @@ import '../styles/main.css';
 import { Dispatch, SetStateAction, useState} from 'react';
 import { ControlledInput } from './ControlledInput';
 import { CommandMap } from '../commands/CommandMap';
+import { MockedDataMap } from '../commands/MockedDataMap';
 
 interface REPLInputProps{
   // TODO: Fill this with desired props... Maybe something to keep track of the submitted commands
@@ -18,18 +19,22 @@ export function REPLInput(props : REPLInputProps) {
   const [commandString, setCommandString] = useState<string>('');
   const commandMap = new CommandMap();
   commandMap.addDefaultCommands();
+  const fileMap = new MockedDataMap();
+  fileMap.addDefaultFiles();
+  // console.log(fileMap.getFile('simpleData'))
                                                                                                                                 
   // TODO WITH TA: build a handleSubmit function called in button onClick
   function handleSubmit(commandString: string) {
     let strArray: string[] = commandString.split(' ');
     if (commandMap.getCommand(strArray[0]) != null) {
-      props.setHistory([...props.history, [commandString, commandMap.getCommand(strArray[0])(strArray.slice(1), props.briefMode, props.setBriefMode)]]);
+      props.setHistory([...props.history, [commandString, commandMap.getCommand(strArray[0])(strArray.slice(1), fileMap, props.briefMode, props.setBriefMode)]]);
     } else {
       props.setHistory([...props.history, [commandString, "Command not recognized"]]);
     }
     setCommandString('');
   }
-  
+    // TODO: Once it increments, try to make it push commands... Note that you can use the `...` spread syntax to copy what was there before
+    // add to it with new commands.
     /**
      * We suggest breaking down this component into smaller components, think about the individual pieces 
      * of the REPL and how they connect to each other...
