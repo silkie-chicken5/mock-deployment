@@ -1,9 +1,13 @@
+import { MockedDataMap } from './MockedDataMap.js';
 import { REPLFunction } from './REPLFunction.js'
 import { Dispatch, SetStateAction} from 'react';
 
 
 const modeFunction: REPLFunction = (
     args: string[],
+    fileMap: MockedDataMap,
+    loadedFile: string[][],
+    setLoadedFile: Dispatch<SetStateAction<(string[][])>>,
     briefMode: boolean,
     setBriefMode: Dispatch<SetStateAction<boolean>>
 ) => {
