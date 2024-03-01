@@ -18,7 +18,15 @@ export function mockedData(file: string): string[][]{
         return [[]];
     }
     if (file == 'malformedData'){
-        return [["I", "am"],["malformed", "data","the","third"],["nice", "to", "meetyou"]]
+        return [["I", "am"],
+        ["malformed", "data","the","third"],
+        ["nice", "to", "meetyou"]]
+    }
+    if (file == 'repeatedData') {
+        return [["what", "what", "what"],
+            ["ah", "yo", "sup"],
+            ["what", "yo", "oops"],
+            ["what", "what", "what"]]
     }
     return [[]]
 }
