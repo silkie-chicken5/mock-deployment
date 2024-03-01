@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useState} from 'react';
 import { MockedDataMap } from './MockedDataMap.js';
 import {REPLFunction} from './REPLFunction.js'
 /**
- * This is the loadCSV function. It takes in the users passed in file path, and attempts
+ * This is the loadCSVfunction. It takes in the users passed in file path, and attempts
  * to load it in. If the file path is accepted, then it will set the loadedFile constant
  * to the file just loaded in. If the file path is not accepted then it will provide the
  * error on why it was not accepted.
@@ -28,10 +28,12 @@ const loadCSVFunction: REPLFunction = (args: Array<string>,
             if (fileMap.getFile(args[0]).toString() === ""){
                 return 'Please load a non-empty file'
             }
-            //if the file trying to be uploaded 
+            //if the file trying to be uploaded is currently the loaded file, tell the user that
+            //the file is already uploaded 
             if (fileMap.getFile(args[0]).toString() === loadedFile.toString()) {
                 return 'File is already loaded';
             }
+            //set the loaded file to the file the user requested and inform the user its been done
             setLoadedFile(fileMap.getFile(args[0]));
             return 'File successfully loaded';
         }

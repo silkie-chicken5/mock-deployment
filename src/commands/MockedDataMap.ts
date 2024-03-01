@@ -1,20 +1,30 @@
 import {mockedData} from '../data/mockedData';
-import { Dispatch, SetStateAction, useState} from 'react';
+/**
+ * This is the MockedDataMap class. This creates a hashMap class specifically meant for mapping
+ * possible file names to its file contents. This class is instantiated in REPLInput and is to be
+ * used in loadCSV, searchCSV, and viewCSV. It provides functions to get a file, add a file, remove
+ * a file, and a function to add default files which retrieves it from a mockedData file. These
+ * methods make it easier for another developer to use this class to add or remove their own files.
+ * This class also provides a function for a mocked version of Search, replicating responses that 
+ * search would give depening on the arguments passed in.
+ */
 export class MockedDataMap {
+    //this creates the hashmap used to map a file to its file contents
     private hashMap: { [key: string]: string[][] } = {};
-
+    //this is a get method to get a file from the hashmap
     getFile(fileName: string): string[][] {
         return this.hashMap[fileName];
     }
-
+    //this method adds a file and its content to the file map
     addFile(fileName: string, file: string[][]) {
         this.hashMap[fileName] = file;
     }
-
+    //this method removes a file from the file map
     removeFile(fileName: string) {
         delete this.hashMap[fileName];
     }
-
+    //this method adds the default files that is used in this program. It gets the file from 
+    //the mockedData file
     addDefaultFiles() {
         this.hashMap['data/simpleData.csv'] = mockedData('simpleData');
         this.hashMap['data/headerData.csv'] = mockedData('headerData')
@@ -23,12 +33,17 @@ export class MockedDataMap {
         this.hashMap['data/malformedData.csv'] = mockedData('malformedData');
         this.hashMap['data/repeatedData.csv'] = mockedData('repeatedData');
     }
-
+    //this is the mockSearch method which mocks what our backend search would return
+    //it takes in a column identifer and a value to search for
     mockSearch(column: string, value: string, loadedFile: string[][]): string | string[][]  {
+        //format the string to remove excess spaces and make it lower case
         let columnFormatted = column.trim().toLowerCase();
         let valueFormatted = value.trim().toLowerCase();
+        //create a boolean that will tell us if the column identifier is a string or only contains numbers
         let nonIntegerColumnBoolean = /[a-z]/i.test(columnFormatted);
+        //this if statement replicates search for the simpleData.csv
         if (loadedFile.toString() == this.hashMap['data/simpleData.csv'].toString()){
+            //check if column is an integer, if it is then replicate search
             if (!nonIntegerColumnBoolean){
                 if (parseInt(columnFormatted) > 3 || parseInt(columnFormatted) < 0){
                     return 'Error: index' + column + 'is out of range of data set'
@@ -76,6 +91,7 @@ export class MockedDataMap {
                     }
                 }
             }
+            //if column is a string then replicate search for column is a string
             if (columnFormatted == "hello"){
                 if (valueFormatted == "hello"){
                     return [["hello", "my", "name"]];
@@ -119,7 +135,9 @@ export class MockedDataMap {
                 }
             }
         }
+        //this if statement replicates search for the oneColumnData.csv
         if (loadedFile.toString() == this.hashMap['data/oneColumnData.csv'].toString()){
+            //if column is a integer then replicate search for column is a integer
             if (!nonIntegerColumnBoolean){
                 if (parseInt(columnFormatted) != 1){
                     return 'Error: index' + column + 'is out of range of data set'
@@ -140,6 +158,7 @@ export class MockedDataMap {
                     return [["so"]];
                 }
             }
+            //if column is a string then replicate search for column is a string
             if (columnFormatted == "burger"){
                 if (valueFormatted == "yum"){
                     return [["yum"],["yum"]];
@@ -158,7 +177,9 @@ export class MockedDataMap {
                 }
             }
         }
+        //this if statement replicates search for the malformedData.csv
         if (loadedFile.toString() == this.hashMap['data/malformedData.csv'].toString()){
+            //if column is an integer then replicate search for column is an integer
             if (!nonIntegerColumnBoolean){
                 if (parseInt(columnFormatted) > 2){
                     return 'Error: index' + column + 'is out of range of data set'
@@ -186,6 +207,7 @@ export class MockedDataMap {
                     }
                 }
             }
+            //if column is a string then replicate search for column is a string
             if (columnFormatted == "i"){
                 if (valueFormatted == "i"){
                         return [["I", "am"]];
@@ -209,7 +231,9 @@ export class MockedDataMap {
                 }
             }
         }
+        //this if statement replicates search for the headerData.csv
         if (loadedFile.toString() == this.hashMap['data/headerData.csv'].toString()){
+            //if column is an integer then replicate search for column is an integer
             if (!nonIntegerColumnBoolean){
                 if (parseInt(columnFormatted) > 3 || parseInt(columnFormatted) < 0){
                     return 'Error: index' + column + 'is out of range of data set'
@@ -257,6 +281,7 @@ export class MockedDataMap {
                     }
                 }
             }
+            //if column is a string then replicate search for column is a string
             if (columnFormatted == "name"){
                 if (valueFormatted == "name"){
                     return [["name", "age", "job"]];
@@ -300,7 +325,9 @@ export class MockedDataMap {
                 }
             }
         }
+        //this if statement replicates search for the repeatedData.csv
         if (loadedFile.toString() == this.hashMap['data/repeatedData.csv'].toString()){
+            //if column is an integer then replicate search for column is an integer
             if (!nonIntegerColumnBoolean){
                 if (parseInt(columnFormatted) > 3 || parseInt(columnFormatted) < 0){
                     return 'Error: index' + column + 'is out of range of data set'
@@ -333,6 +360,7 @@ export class MockedDataMap {
                     }
                 }
             }
+            //if column is a string then replicate search for column is a string
             if (columnFormatted == "what"){
                 if (valueFormatted == "what"){
                     return [["what", "what", "what"],
@@ -350,6 +378,8 @@ export class MockedDataMap {
                 }
             }
         }
+        //if the search didn't find any instance of the arguments passed in,
+        //then give a response informing the user of that
         return 'No instances of value: ' + value + ' were found in column: ' + column;
     }
 }
