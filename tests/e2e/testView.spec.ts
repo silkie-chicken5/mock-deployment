@@ -6,12 +6,6 @@ test.beforeEach(async ({page}) => {
     await page.getByLabel('Command input').click();
 })
 
-/**
- * test view w simple data load shape
- * test view with header data shape
- * test view with one col data shape
- * test view with malformed data shape
- */
 
 test('view too many args inputted, brief mode', async ({ page }) => {
   await page.getByLabel('Command input').fill('load data/simpleData.csv');
