@@ -46,7 +46,7 @@ export class MockedDataMap {
             //check if column is an integer, if it is then replicate search
             if (!nonIntegerColumnBoolean){
                 if (parseInt(columnFormatted) > 3 || parseInt(columnFormatted) < 0){
-                    return 'Error: index' + column + 'is out of range of data set'
+                    return 'Error: index ' + column + ' is out of range of data set'
                 }
                 if (columnFormatted == "1"){
                     if (valueFormatted == "hello"){
@@ -140,7 +140,7 @@ export class MockedDataMap {
             //if column is a integer then replicate search for column is a integer
             if (!nonIntegerColumnBoolean){
                 if (parseInt(columnFormatted) != 1){
-                    return 'Error: index' + column + 'is out of range of data set'
+                    return 'Error: index ' + column + ' is out of range of data set'
                 }
                 if (valueFormatted == "yum"){
                     return [["yum"],["yum"]];
@@ -182,7 +182,7 @@ export class MockedDataMap {
             //if column is an integer then replicate search for column is an integer
             if (!nonIntegerColumnBoolean){
                 if (parseInt(columnFormatted) > 2){
-                    return 'Error: index' + column + 'is out of range of data set'
+                    return 'Error: index ' + column + ' is out of range of data set'
                 }
                 if (columnFormatted == "1"){
                     if (valueFormatted == "i"){
@@ -236,7 +236,7 @@ export class MockedDataMap {
             //if column is an integer then replicate search for column is an integer
             if (!nonIntegerColumnBoolean){
                 if (parseInt(columnFormatted) > 3 || parseInt(columnFormatted) < 0){
-                    return 'Error: index' + column + 'is out of range of data set'
+                    return 'Error: index ' + column + ' is out of range of data set'
                 }
                 if (columnFormatted == "1"){
                     if (valueFormatted == "name"){
@@ -330,7 +330,7 @@ export class MockedDataMap {
             //if column is an integer then replicate search for column is an integer
             if (!nonIntegerColumnBoolean){
                 if (parseInt(columnFormatted) > 3 || parseInt(columnFormatted) < 0){
-                    return 'Error: index' + column + 'is out of range of data set'
+                    return 'Error: index ' + column + ' is out of range of data set'
                 }
                 if (columnFormatted == "1"){
                     if (valueFormatted == "what"){
