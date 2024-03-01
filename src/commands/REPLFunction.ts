@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
+import { MockedDataMap } from './MockedDataMap';
 
 /**
  * A command-processor function for our REPL. The function returns a string, which is the value to print to history when 
@@ -10,6 +11,9 @@ import { Dispatch, SetStateAction } from 'react';
  */
 export interface REPLFunction {    
     (args: Array<string>,
+        fileMap: MockedDataMap,
+        loadedFile: string[][],
+        setLoadedFile: Dispatch<SetStateAction<(string[][])>>,
         briefMode: boolean,
         setBriefMode: Dispatch<SetStateAction<boolean>>): string | string[][];
 }
