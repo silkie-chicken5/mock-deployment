@@ -31,7 +31,7 @@ export class MockedDataMap {
         if (loadedFile.toString() == this.hashMap['data/simpleData.csv'].toString()){
             if (!nonIntegerColumnBoolean){
                 if (parseInt(columnFormatted) > 3 || parseInt(columnFormatted) < 0){
-                    return 'Error: index' + column + 'is out of range of data set'
+                    return 'Error: index ' + column + ' is out of range of data set'
                 }
                 if (columnFormatted == "1"){
                     if (valueFormatted == "hello"){
@@ -122,7 +122,7 @@ export class MockedDataMap {
         if (loadedFile.toString() == this.hashMap['data/oneColumnData.csv'].toString()){
             if (!nonIntegerColumnBoolean){
                 if (parseInt(columnFormatted) != 1){
-                    return 'Error: index' + column + 'is out of range of data set'
+                    return 'Error: index ' + column + ' is out of range of data set'
                 }
                 if (valueFormatted == "yum"){
                     return [["yum"],["yum"]];
@@ -161,7 +161,7 @@ export class MockedDataMap {
         if (loadedFile.toString() == this.hashMap['data/malformedData.csv'].toString()){
             if (!nonIntegerColumnBoolean){
                 if (parseInt(columnFormatted) > 2){
-                    return 'Error: index' + column + 'is out of range of data set'
+                    return 'Error: index ' + column + ' is out of range of data set'
                 }
                 if (columnFormatted == "1"){
                     if (valueFormatted == "i"){
@@ -212,7 +212,7 @@ export class MockedDataMap {
         if (loadedFile.toString() == this.hashMap['data/headerData.csv'].toString()){
             if (!nonIntegerColumnBoolean){
                 if (parseInt(columnFormatted) > 3 || parseInt(columnFormatted) < 0){
-                    return 'Error: index' + column + 'is out of range of data set'
+                    return 'Error: index ' + column + ' is out of range of data set'
                 }
                 if (columnFormatted == "1"){
                     if (valueFormatted == "name"){
@@ -303,7 +303,7 @@ export class MockedDataMap {
         if (loadedFile.toString() == this.hashMap['data/repeatedData.csv'].toString()){
             if (!nonIntegerColumnBoolean){
                 if (parseInt(columnFormatted) > 3 || parseInt(columnFormatted) < 0){
-                    return 'Error: index' + column + 'is out of range of data set'
+                    return 'Error: index ' + column + ' is out of range of data set'
                 }
                 if (columnFormatted == "1"){
                     if (valueFormatted == "what"){

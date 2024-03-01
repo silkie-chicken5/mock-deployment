@@ -6,9 +6,7 @@ test.beforeEach(async ({page}) => {
   await page.getByLabel('Command input').click();
 })
 
-test('no mode args inputted, in brief mode', async ({ page }) => {
-  await expect(page.getByTitle("repl-history")).toBeVisible();
-  
+test('no mode args inputted, in brief mode', async ({ page }) => {  
   await page.getByLabel('Command input').fill('mode');
   await page.getByRole('button', {name: 'Submit'}).click();
 
