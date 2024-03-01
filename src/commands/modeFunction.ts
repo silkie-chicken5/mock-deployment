@@ -16,19 +16,19 @@ const modeFunction: REPLFunction = (
     } else if (args.length == 1) {
         if (args[0] === "brief") {
             if (briefMode === true) {
-                return 'Already in mode brief.'
+                return 'Already in mode brief'
             }
             setBriefMode(true)
-            return 'Now in mode brief.'
+            return 'Now in mode brief'
         }
         if (args[0] === "verbose") {
             if (briefMode === false) {
-                return 'Already in mode verbose.'
+                return 'Already in mode verbose'
             }
             setBriefMode(false)
-            return 'Now in mode verbose.'
+            return 'Now in mode verbose'
         }
-        return 'Please specify a supported mode.'
+        return 'Please specify a supported mode'
     }
     return 'You have inputted too many arguments';
 }
