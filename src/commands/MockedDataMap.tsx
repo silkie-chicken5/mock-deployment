@@ -18,4 +18,13 @@ export class MockedDataMap {
     addDefaultFiles() {
         this.hashMap['simpleData'] = [["hello", "my", "name"],["is","billy","bob"]];
     }
+
+    mockSearch(column: string, value: string): string | string[][]  {
+        if (column == "hello" || column == "1"){
+            if (value == "is" || value == "billy" || value == "bob"){
+                return [["is","billy","bob"]];
+            }
+        }
+        return [[]];
+    }
 }
