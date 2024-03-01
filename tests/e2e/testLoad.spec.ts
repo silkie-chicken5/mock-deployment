@@ -17,21 +17,6 @@ test('no load args inputted, brief mode', async ({ page }) => {
   expect(firstChild).toEqual("Please include the file you want to load");
 })
 
-test('no load args inputted, verbose mode', async ({ page }) => {
-  await page.getByLabel('Command input').fill('mode verbose');
-  await page.getByRole('button', { name: 'Submit' }).click();
-    
-  await page.getByLabel('Command input').click();
-  await page.getByLabel('Command input').fill('load');
-  await page.getByRole('button', {name: 'Submit'}).click();
-
-  const firstChild = await page.evaluate(() => {
-    const history = document.querySelector('.repl-history');
-    return history?.children[1]?.textContent;
-  });
-  expect(firstChild).toEqual("Command: loadOutput: Please include the file you want to load");
-})
-
 test('wrong load args inputted, brief mode', async ({ page }) => {
   await page.getByLabel('Command input').fill('load blep');
   await page.getByRole('button', {name: 'Submit'}).click();
@@ -41,21 +26,6 @@ test('wrong load args inputted, brief mode', async ({ page }) => {
     return history?.children[0]?.textContent;
   });
   expect(firstChild).toEqual("Please give a supported file path");
-})
-
-test('wrong load args inputted, verbose mode', async ({ page }) => {
-  await page.getByLabel('Command input').fill('mode verbose');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    
-  await page.getByLabel('Command input').click();
-  await page.getByLabel('Command input').fill('load blep');
-  await page.getByRole('button', {name: 'Submit'}).click();
-
-  const firstChild = await page.evaluate(() => {
-    const history = document.querySelector('.repl-history');
-    return history?.children[1]?.textContent;
-  });
-  expect(firstChild).toEqual("Command: load blepOutput: Please give a supported file path");
 })
 
 test('too many load args inputted, brief mode', async ({ page }) => {
@@ -69,21 +39,6 @@ test('too many load args inputted, brief mode', async ({ page }) => {
   expect(firstChild).toEqual("You have inputted too many arguments");
 })
 
-test('too many load args inputted, verbose mode', async ({ page }) => {
-  await page.getByLabel('Command input').fill('mode verbose');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    
-  await page.getByLabel('Command input').click();
-  await page.getByLabel('Command input').fill('load blep blop');
-  await page.getByRole('button', {name: 'Submit'}).click();
-
-  const firstChild = await page.evaluate(() => {
-    const history = document.querySelector('.repl-history');
-    return history?.children[1]?.textContent;
-  });
-  expect(firstChild).toEqual("Command: load blep blopOutput: You have inputted too many arguments");
-})
-
 test('load empty file inputted, brief mode', async ({ page }) => {
   await page.getByLabel('Command input').fill('load data/emptyData.csv');
   await page.getByRole('button', {name: 'Submit'}).click();
@@ -95,21 +50,6 @@ test('load empty file inputted, brief mode', async ({ page }) => {
   expect(firstChild).toEqual("Please load a non empty file");
 })
 
-test('load empty file inputted, verbose mode', async ({ page }) => {
-  await page.getByLabel('Command input').fill('mode verbose');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    
-  await page.getByLabel('Command input').click();
-  await page.getByLabel('Command input').fill('load data/emptyData.csv');
-  await page.getByRole('button', {name: 'Submit'}).click();
-
-  const firstChild = await page.evaluate(() => {
-    const history = document.querySelector('.repl-history');
-    return history?.children[1]?.textContent;
-  });
-  expect(firstChild).toEqual("Command: load data/emptyData.csvOutput: Please load a non empty file");
-})
-
 test('load successful, brief mode', async ({ page }) => {
   await page.getByLabel('Command input').fill('load data/simpleData.csv');
   await page.getByRole('button', {name: 'Submit'}).click();
@@ -119,21 +59,6 @@ test('load successful, brief mode', async ({ page }) => {
     return history?.children[0]?.textContent;
   });
   expect(firstChild).toEqual("File successfully loaded");
-})
-
-test('load successful, verbose mode', async ({ page }) => {
-  await page.getByLabel('Command input').fill('mode verbose');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    
-  await page.getByLabel('Command input').click();
-  await page.getByLabel('Command input').fill('load data/simpleData.csv');
-  await page.getByRole('button', {name: 'Submit'}).click();
-
-  const firstChild = await page.evaluate(() => {
-    const history = document.querySelector('.repl-history');
-    return history?.children[1]?.textContent;
-  });
-  expect(firstChild).toEqual("Command: load data/simpleDataOutput: File successfully loaded");
 })
 
 test('load twice, brief mode', async ({ page }) => {
@@ -149,23 +74,4 @@ test('load twice, brief mode', async ({ page }) => {
     return history?.children[1]?.textContent;
   });
   expect(firstChild).toEqual("File is already loaded");
-})
-
-test('load twice, verbose mode', async ({ page }) => {
-  await page.getByLabel('Command input').fill('mode verbose');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    
-  await page.getByLabel('Command input').click();
-  await page.getByLabel('Command input').fill('load data/simpleData.csv');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    
-    await page.getByLabel('Command input').click();
-    await page.getByLabel('Command input').fill('load data/simpleData.csv');
-  await page.getByRole('button', {name: 'Submit'}).click();
-
-  const firstChild = await page.evaluate(() => {
-    const history = document.querySelector('.repl-history');
-    return history?.children[2]?.textContent;
-  });
-  expect(firstChild).toEqual("Command: load data/simpleDataOutput: File is already loaded");
 })

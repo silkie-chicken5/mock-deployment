@@ -6,7 +6,7 @@ const viewCSVFunction: REPLFunction = (args: Array<string>,
      fileMap: MockedDataMap,
       loadedFile: string[][]): string | string[][] => {
         if(loadedFile.toString() === ""){
-          return 'Please load a non empty file.'
+          return 'Please load a csv before running the view command'
         }
     return loadedFile;
 

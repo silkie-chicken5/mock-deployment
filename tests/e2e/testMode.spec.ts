@@ -2,11 +2,11 @@ import { expect, test } from "@playwright/test";
 
 test.beforeEach(async ({page}) => {
     await page.goto('http://localhost:8000/');
+    await page.getByLabel('Login').click();
+    await page.getByLabel('Command input').click();
 })
 
 test('no mode args inputted, in brief mode', async ({ page }) => {
-  await page.getByLabel('Login').click();
-  await page.getByLabel('Command input').click();
   await page.getByLabel('Command input').fill('mode');
   await page.getByRole('button', {name: 'Submit'}).click();
 
@@ -18,8 +18,6 @@ test('no mode args inputted, in brief mode', async ({ page }) => {
 })
 
 test('wrong mode args inputted, in brief mode', async ({ page }) => {
-  await page.getByLabel('Login').click();
-  await page.getByLabel('Command input').click();
   await page.getByLabel('Command input').fill('mode bleh');
   await page.getByRole('button', {name: 'Submit'}).click();
 
@@ -31,8 +29,6 @@ test('wrong mode args inputted, in brief mode', async ({ page }) => {
 })
 
 test('too many mode args inputted, in brief mode', async ({ page }) => {
-  await page.getByLabel('Login').click();
-  await page.getByLabel('Command input').click();
   await page.getByLabel('Command input').fill('mode mode mode');
   await page.getByRole('button', {name: 'Submit'}).click();
 
@@ -44,8 +40,6 @@ test('too many mode args inputted, in brief mode', async ({ page }) => {
 })
 
 test('on mode brief inputted, command already in mode brief', async ({ page }) => {
-  await page.getByLabel('Login').click();
-  await page.getByLabel('Command input').click();
   await page.getByLabel('Command input').fill('mode brief');
   await page.getByRole('button', { name: 'Submit' }).click();
   
@@ -61,8 +55,6 @@ test('on mode brief inputted, command already in mode brief', async ({ page }) =
 })
 
 test('on mode verbose inputted, command now in mode verbose', async ({ page }) => {
-  await page.getByLabel('Login').click();
-  await page.getByLabel('Command input').click();
   await page.getByLabel('Command input').fill('mode verbose');
   await page.getByRole('button', {name: 'Submit'}).click();
 
@@ -74,8 +66,6 @@ test('on mode verbose inputted, command now in mode verbose', async ({ page }) =
 })
 
 test('on mode verbose & verbose inputted, command already in mode verbose', async ({ page }) => {
-  await page.getByLabel('Login').click();
-  await page.getByLabel('Command input').click();
   await page.getByLabel('Command input').fill('mode verbose');
   await page.getByRole('button', { name: 'Submit' }).click();
   
@@ -91,8 +81,6 @@ test('on mode verbose & verbose inputted, command already in mode verbose', asyn
 })
 
 test('on mode verbose & brief inputted, command now in mode brief', async ({ page }) => {
-  await page.getByLabel('Login').click();
-  await page.getByLabel('Command input').click();
   await page.getByLabel('Command input').fill('mode verbose');
   await page.getByRole('button', { name: 'Submit' }).click();
   
@@ -108,8 +96,6 @@ test('on mode verbose & brief inputted, command now in mode brief', async ({ pag
 })
 
 test('no mode args inputted, in verbose mode', async ({ page }) => {
-  await page.getByLabel('Login').click();
-  await page.getByLabel('Command input').click();
   await page.getByLabel('Command input').fill('mode verbose');
   await page.getByRole('button', { name: 'Submit' }).click();
   
@@ -125,8 +111,6 @@ test('no mode args inputted, in verbose mode', async ({ page }) => {
 })
 
 test('wrong mode args inputted, in verbose mode', async ({ page }) => {
-  await page.getByLabel('Login').click();
-  await page.getByLabel('Command input').click();
   await page.getByLabel('Command input').fill('mode verbose');
   await page.getByRole('button', { name: 'Submit' }).click();
   
@@ -142,8 +126,6 @@ test('wrong mode args inputted, in verbose mode', async ({ page }) => {
 })
 
 test('too many mode args inputted, in verbose mode', async ({ page }) => {
-  await page.getByLabel('Login').click();
-  await page.getByLabel('Command input').click();
   await page.getByLabel('Command input').fill('mode verbose');
   await page.getByRole('button', { name: 'Submit' }).click();
   
