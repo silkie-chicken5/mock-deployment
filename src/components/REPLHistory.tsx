@@ -1,12 +1,15 @@
 import '../styles/main.css';
-
+//Interface type passed into argument type of REPLHistory, this ensures that the necessary arguments are
+//passed into the function
 interface REPLHistoryProps{
     history: (string | string[][])[][]
     briefMode: boolean
-    // TODO: Fill with some shared state tracking all the pushed commands
 }
+//This is a helper function to format each command that is currently in the history array
 function tableGenerator(command: string | string[][], briefMode: boolean){
+    //if the argument passed in is a string then just need paragraph tags
     if (typeof command === "string"){
+        //check if we're in brief mode
         if (briefMode){
             return (
             <p>{command}</p>
@@ -16,7 +19,9 @@ function tableGenerator(command: string | string[][], briefMode: boolean){
             <p>Output: {command}</p>
         );
     }
+    //if the argument passed in was a string[][], we create an HTML table for it
     else{
+        //check if in brief mode
         if (briefMode){
             return (
                 <table>
@@ -31,6 +36,7 @@ function tableGenerator(command: string | string[][], briefMode: boolean){
                 </table>
             );
         }
+        //if in brief mode then create an Output: display before creating the HTML table
         return (
             <div>
                 <p>Output:</p>
@@ -48,9 +54,18 @@ function tableGenerator(command: string | string[][], briefMode: boolean){
         ); 
     }
 }
-
+/**
+ * This function turns the history array passed in into HTML code to display the history on the
+ * website. In it, it checks if the responses should be brief or verbose. It also calls a helper
+ * function called tableGenerator() to help display the history in the correct format.
+ * @param props - of type REPLHistoryProps
+ * @returns - HTML code for displaying the history
+ */
 export function REPLHistory(props : REPLHistoryProps) {
+    //check if in briefmode
     if (props.briefMode) {
+        //map through the history array and call the helper function on each element
+        //to display each element in the correct format
         return (
             <div className="repl-history">
                 {
@@ -60,6 +75,9 @@ export function REPLHistory(props : REPLHistoryProps) {
             </div>
         );
     }
+    //If not in briefmode then must show the command and its output. Also
+    //map through the history array and call the helper function on each element
+    //to display each element in the correct format
     return (
             <div className="repl-history">
                 {
