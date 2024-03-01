@@ -1,4 +1,4 @@
-//import mockedData from '../data/mockedData';
+import {mockedData} from '../data/mockedData';
 import { Dispatch, SetStateAction, useState} from 'react';
 export class MockedDataMap {
     private hashMap: { [key: string]: string[][] } = {};
@@ -16,7 +16,10 @@ export class MockedDataMap {
     }
 
     addDefaultFiles() {
-        this.hashMap['simpleData'] = [["hello", "my", "name"],["is","billy","bob"]];
+        this.hashMap['simpleData'] = mockedData('simpleData');
+        this.hashMap['oneColumnData'] = mockedData('oneColumnData');
+        this.hashMap['emptyData'] = mockedData('emptyData');
+        this.hashMap['malformedData'] = mockedData('malformedData');
     }
 
     mockSearch(column: string, value: string): string | string[][]  {
