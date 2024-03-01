@@ -11,7 +11,7 @@ const loadCSVFunction: REPLFunction = (args: Array<string>,
     } else if (args.length == 1) {
         if (fileMap.getFile(args[0]) != null){
             if (fileMap.getFile(args[0]).toString() === ""){
-                return 'Please load a non empty file'
+                return 'Please load a non-empty file'
             }
             if (fileMap.getFile(args[0]).toString() === loadedFile.toString()) {
                 return 'File is already loaded';

@@ -47,7 +47,7 @@ test('load empty file inputted, brief mode', async ({ page }) => {
     const history = document.querySelector('.repl-history');
     return history?.children[0]?.textContent;
   });
-  expect(firstChild).toEqual("Please load a non empty file");
+  expect(firstChild).toEqual("Please load a non-empty file");
 })
 
 test('load successful, brief mode', async ({ page }) => {

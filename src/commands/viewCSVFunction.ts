@@ -5,8 +5,11 @@ import {REPLFunction} from './REPLFunction.js'
 const viewCSVFunction: REPLFunction = (args: Array<string>,
      fileMap: MockedDataMap,
       loadedFile: string[][]): string | string[][] => {
+        if (args.length != 0){
+          return 'You have inputted too many arguments'
+        }
         if(loadedFile.toString() === ""){
-          return 'Please load a csv before running the view command'
+          return 'Please load a non-empty csv before running the view command'
         }
     return loadedFile;
 
