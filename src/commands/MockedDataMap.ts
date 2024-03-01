@@ -23,12 +23,34 @@ export class MockedDataMap {
         this.hashMap['data/malformedData.csv'] = mockedData('malformedData');
     }
 
-    mockSearch(column: string, value: string): string | string[][]  {
-        if (column == "hello" || column == "1"){
-            if (value == "is" || value == "billy" || value == "bob"){
-                return [["is","billy","bob"]];
+    mockSearch(column: string, value: string, loadedFile: string[][]): string | string[][]  {
+        let columnFormatted = column.trim().toLowerCase();
+        let valueFormatted = value.trim().toLowerCase();
+        let nonIntegerColumnBoolean = /[a-z]/i.test(columnFormatted);
+        if (loadedFile.toString() == this.hashMap['data/simpleData.csv'].toString()){
+            if (!nonIntegerColumnBoolean){
+                if (parseInt(columnFormatted) > 3 || parseInt(columnFormatted) < 0){
+                    return 'Error: index entered is out of range of data set'
+                }
+            }
+            if (columnFormatted == "hello" || columnFormatted == "1"){
+                if (valueFormatted == "is" || valueFormatted == "billy" || valueFormatted == "bob"){
+                    return [["is","billy","bob"]];
+                }
             }
         }
-        return [[]];
+        if (loadedFile.toString() == this.hashMap['data/oneColumnData.csv'].toString()){
+            if (!nonIntegerColumnBoolean){
+                if (parseInt(columnFormatted) != 1){
+                    return 'Error: index entered is out of range of data set'
+                }
+            }
+            if (columnFormatted == "burger" || columnFormatted == "1"){
+                if (valueFormatted == "yum"){
+                    return [["yum"],["yum"]];
+                }
+            }
+        }
+        return 'No instances of value: ' + value + ' were found in column: ' + column;
     }
 }

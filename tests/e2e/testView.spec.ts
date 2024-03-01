@@ -85,5 +85,5 @@ test('view malformed data, brief mode', async ({ page }) => {
     const history = document.querySelector('.repl-history');
     return history?.children[1]?.textContent;
   });
-  expect(firstChild).toEqual("hellomynameisbillybobandIlikeeatinghotdogs");
+  expect(firstChild).toEqual("Iammalformeddatathethirdnicetomeetyou");
 })

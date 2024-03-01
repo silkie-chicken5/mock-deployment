@@ -9,7 +9,7 @@ const searchCSVFunction: REPLFunction = (args: Array<string>, fileMap: MockedDat
         return 'Error: undesired number of arguments. Please follow the format of \'search <column> <value>\''
     }
     
-    return fileMap.mockSearch(args[0], args[1]);
+    return fileMap.mockSearch(args[0], args[1], loadedFile);
 }
 
 export default searchCSVFunction;

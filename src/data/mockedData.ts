@@ -12,13 +12,13 @@ export function mockedData(file: string): string[][]{
             ["andyvandam", "76", "professor"]]
     }
     if (file == 'oneColumnData') {
-        return [["hello"], ["my"], ["name"],["is"],["billy"],["bob"]];
+        return [["burger"], ["king"], ["is"],["so"],["yum"],["yum"]];
     }
     if (file == 'emptyData'){
         return [[]];
     }
     if (file == 'malformedData'){
-        return [["hello", "my"],["name", "is","billy","bob"],["nice", "to", "meetyou"]]
+        return [["I", "am"],["malformed", "data","the","third"],["nice", "to", "meetyou"]]
     }
     return [[]]
 }
