@@ -28,7 +28,7 @@ test('view no load, brief mode', async ({ page }) => {
     const history = document.querySelector('.repl-history');
     return history?.children[2]?.textContent;
   });
-  expect(firstChild).toEqual("hellomynameisbillybobandIlikeeatinghotdogs");
+  expect(secondChild).toEqual("hellomynameisbillybobandIlikeeatinghotdogs");
 })
 
 test('search no load, brief mode', async ({ page }) => {    
@@ -53,7 +53,7 @@ test('search no load, brief mode', async ({ page }) => {
     const history = document.querySelector('.repl-history');
     return history?.children[2]?.textContent;
   });
-  expect(firstChild).toEqual("hellomyname");
+  expect(secondChild).toEqual("hellomyname");
 })
 
 test('search and view no load, brief mode', async ({ page }) => {    
@@ -72,7 +72,7 @@ test('search and view no load, brief mode', async ({ page }) => {
 
   const secondChild = await page.evaluate(() => {
     const history = document.querySelector('.repl-history');
-    return history?.children[0]?.textContent;
+    return history?.children[1]?.textContent;
   });
   expect(secondChild).toEqual("Please load a non-empty csv before running the search command");
 })
@@ -85,7 +85,7 @@ test('view after load wrong, brief mode', async ({ page }) => {
     const history = document.querySelector('.repl-history');
     return history?.children[0]?.textContent;
   });
-  expect(firstChild).toEqual("Please give a supported filepath");
+  expect(firstChild).toEqual("Please give a supported file path");
   
   await page.getByLabel('Command input').click();
     await page.getByLabel('Command input').fill('view');
@@ -106,7 +106,7 @@ test('search after load wrong, brief mode', async ({ page }) => {
     const history = document.querySelector('.repl-history');
     return history?.children[0]?.textContent;
   });
-  expect(firstChild).toEqual("Please give a supported filepath");
+  expect(firstChild).toEqual("Please give a supported file path");
   
   await page.getByLabel('Command input').click();
     await page.getByLabel('Command input').fill('search 1 hello');
@@ -160,9 +160,9 @@ test('load load search, brief mode', async ({ page }) => {
 
   const secondChild = await page.evaluate(() => {
     const history = document.querySelector('.repl-history');
-    return history?.children[2]?.textContent;
+    return history?.children[3]?.textContent;
   });
-  expect(secondChild).toEqual("No instances of: hello were found in column: 1");
+  expect(secondChild).toEqual("No instances of value: hello were found in column: 1");
 })
 
 test('view search view, brief mode', async ({ page }) => {    
@@ -292,7 +292,7 @@ test('search mode search mode search, brief mode', async ({ page }) => {
     const history = document.querySelector('.repl-history');
     return history?.children[3]?.textContent;
   });
-  expect(secondChild).toEqual("Command: viewOutput:eatinghotdogs");
+  expect(secondChild).toEqual("Command: search my hotOutput:eatinghotdogs");
 
   await page.getByLabel('Command input').click();
     await page.getByLabel('Command input').fill('mode brief');
