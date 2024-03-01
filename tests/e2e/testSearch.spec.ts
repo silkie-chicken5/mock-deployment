@@ -201,3 +201,29 @@ test('search malformed, brief mode', async ({ page }) => {
   });
   expect(secondChild).toEqual("Error: index 3 is out of range of data set");
 })
+
+test('search search, brief mode', async ({ page }) => {
+  await page.getByLabel('Command input').click();
+    await page.getByLabel('Command input').fill('load data/malformedData.csv');
+    await page.getByRole('button', { name: 'Submit' }).click();
+    
+    await page.getByLabel('Command input').click();
+    await page.getByLabel('Command input').fill('search 2 data');
+  await page.getByRole('button', {name: 'Submit'}).click();
+
+  const firstChild = await page.evaluate(() => {
+    const history = document.querySelector('.repl-history');
+    return history?.children[1]?.textContent;
+  });
+    expect(firstChild).toEqual("malformeddatathethird");
+    
+    await page.getByLabel('Command input').click();
+    await page.getByLabel('Command input').fill('search 2 data');
+  await page.getByRole('button', {name: 'Submit'}).click();
+
+  const secondChild = await page.evaluate(() => {
+    const history = document.querySelector('.repl-history');
+    return history?.children[2]?.textContent;
+  });
+  expect(secondChild).toEqual("malformeddatathethird");
+})

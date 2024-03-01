@@ -123,3 +123,28 @@ test('view malformed data, verbose mode', async ({ page }) => {
   });
   expect(firstChild).toEqual("Command: viewOutput:Iammalformeddatathethirdnicetomeetyou");
 })
+
+test('view view, brief mode', async ({ page }) => {
+  await page.getByLabel('Command input').fill('load data/malformedData.csv');
+    await page.getByRole('button', { name: 'Submit' }).click();
+    
+    await page.getByLabel('Command input').click();
+    await page.getByLabel('Command input').fill('view');
+  await page.getByRole('button', {name: 'Submit'}).click();
+
+  const firstChild = await page.evaluate(() => {
+    const history = document.querySelector('.repl-history');
+    return history?.children[1]?.textContent;
+  });
+    expect(firstChild).toEqual("Iammalformeddatathethirdnicetomeetyou");
+    
+    await page.getByLabel('Command input').click();
+    await page.getByLabel('Command input').fill('view');
+  await page.getByRole('button', {name: 'Submit'}).click();
+
+  const secondChild = await page.evaluate(() => {
+    const history = document.querySelector('.repl-history');
+    return history?.children[2]?.textContent;
+  });
+  expect(secondChild).toEqual("Iammalformeddatathethirdnicetomeetyou");
+})
