@@ -5,6 +5,7 @@
     Project Name: Mock
     Team Members: jestra10, mpizigo
     Totat Time: ~15 hours total
+    Github link: https://github.com/cs0320-s24/mock-mpizigo-jestra10.git
 
 # Design Choices - explain relationships any specific data structures and why they were created, runtime optimizations
 
