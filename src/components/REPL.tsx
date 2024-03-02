@@ -3,11 +3,11 @@ import '../styles/main.css';
 import { REPLHistory } from './REPLHistory';
 import { REPLInput } from './REPLInput';
 
-
 /**
  * This is a top level component for the REPL. Here we create two useState hooks, history and briefmode
  * that is passed into both REPLHistory and REPLInput. This allows them to both be called on and both
  * share the same states so that if one is updated, it updates the other.
+ * 
  * @returns - HTML code
  */
 export default function REPL() {

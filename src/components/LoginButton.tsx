@@ -1,5 +1,9 @@
 import { Dispatch, SetStateAction } from 'react';
 
+/**
+ * This is the LoginButton component. It handles the switch from a Login to Sign Out label when clicked,
+ * and changes the useState setIsLogginIn accordingly.
+ */
 
 interface loginProps {
   isLoggedIn: boolean
@@ -14,6 +18,7 @@ export function LoginButton(props: loginProps) {
     return newValue
   }
 
+  //checks what label to switch to depending on whether the user is logged in
   if (props.isLoggedIn) {
     return (
       <button aria-label='Sign Out' onClick={authenticate}>Sign out</button>

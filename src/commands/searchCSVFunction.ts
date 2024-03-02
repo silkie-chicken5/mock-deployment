@@ -4,6 +4,7 @@ import {REPLFunction} from './REPLFunction.js'
  * This is the searchCSVfunction. It takes in the users argument of column and identifier and passes
  * it into the mockSearch method. If there is no currently loaded file or the undesired number of 
  * arguments are provided then it returns an informative message.
+ * 
  * @param args - args passed in is the column identifier and the value being searched for in the csv
  * @param fileMap - hashMap of the file name and file content
  * @param loadedFile - the file that is currently loaded

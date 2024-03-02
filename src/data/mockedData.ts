@@ -1,6 +1,7 @@
 /**
  * This is a function that stores all of our mocked data. To access it we call the function
  * below and get the respective data from the file name.
+ * 
  * @param file - file being requested
  * @returns - string[][] - the contents of the file
  */

@@ -8,49 +8,51 @@
 
 # Design Choices - explain relationships any specific data structures and why they were created, runtime optimizations
 
-    This project is a website that accepts commands and returns an output based on the command inputted.
-    The main portion of the project is in two folders, a commands folder and a components folder. The
-    components folder is where we create the parts of the website by creating and returning HTML code.
+## Structure
+    This project is a website that accepts commands and returns an output based on what was inputted.
+    
+    The main portion of the project is in two folders:
+    1. The components folder -- it creates the website components by creating and returning HTML code.
     The App component calls the LoginButton component. This blocks the user from accessing the text box
     to enter commands until they press the button to log in. This is a good case of defensive programming
-    as we can let only certain people accesss the command box. If we are logged in then App calls the REPL
-    component. In the REPL component, it calls REPLInput and REPLHistory and passes in a shared use state
-    into both. This allows them to access and manipulate the same state. In REPLInput, we call ControlledInput
+    as we can let only certain people accesss the command box. 
+    When logged in, the App calls the REPL component, which passes a useState into REPLInput and REPLHistory.
+    This allows them to access and manipulate the same state. In REPLInput, we call ControlledInput
     and create a button called submit. This is where the user can type in commands and click the submit button
     to have the commands be run. This is the overall structure of the components.
 
-    For the structure of our commands, we have a CommandMap and a REPLFunction interface. The CommandMap is a
-    class that contains a hashmap whose key is of type string and value is of type REPLFunction. The CommandMap
-    provides functions such as adding and deleting files, so that other developers can use this class to add
-    and remove their own functions. This gives them the ability to customize the program to their liking. By
-    having the value in the CommandMap be of type REPLFunction, it guarantees that any function that is of type
-    REPLFunction will work with the CommandMap and will work with the functionality of our command box. One
-    optimization we did with this was the use of currying. When the submit button gets clicked it calls the
-    handleSubmit method which is where we call the respective command. We used currying by getting the
-    function from the command map by using the command the user passed in as a key, then immediately after
-    pass in arguments into that returned function. This optimized our code and made it simpler.
+    2. The commands folder -- it holds a CommandMap and a REPLFunction interface. The CommandMap stores command keywords and associated REPLFunctions in a hashmap. It allows for command insertion and deletion.
 
-    For our project, we implemented four different REPLFunctions: load, view, search, and mode. Load is the
-    function that allows the user to upload a file that is supported by our program. To use it the user
+    We implemented four different REPLFunctions: load, view, search, and mode. 
+    1. Load is the function that allows the user to upload a file that is supported by our program. To use it the user
     must follow the format of 'load <filepath>'. It doesn't allow for empty CSV's or files that are not supported
-    to be uploaded. View allows the user to see the CSV they uploaded in a HTML table format. The formatting of
+    to be uploaded. 
+    2. View allows the user to see the CSV they uploaded in a HTML table format. The formatting of
     the file to HTML table is handled in a helper function in REPLHistory. To use view all the user must type is
-    'view'. If a CSV had not been uploaded, then it will provide an informative error. Search allows the user to
+    'view'. If a CSV had not been uploaded, then it will provide an informative error. 
+    3. Search allows the user to
     search for data in the CSV they had uploaded. To use search the user must use the format of 'search
     <columnIdentifier> <value>'. If the a file has not been uploaded yet, or the columnIdentifier is out of index
     for the CSV it will provide a useful error message. If no search results are found, search willprovide an
-    useful message telling the user that no results were found and repeat the arguments you type in.For mode,
-    this changes the output from brief to verbose or vice-versa. This gives the user the ability to see the
-    commands they typed in repeated back to them if they want. To use this command the user must type
+    useful message telling the user that no results were found and repeat the arguments you type in.
+    4. Mode changes the mode the history is displayed from brief to verbose or vice-versa. This gives the user the ability to see the commands they typed in repeated back to them if they want. To use this command the user must type
     in 'mode brief' or 'mode verbose'.
 
-    The functions must be able to access the files in order to run the commands. To set up the files, we created
-    a class called MockedDataMap. This class is similar to the CommandMap in the way it is set up. It contains
-    a hashmap whose key is string and value is string[][]. It contains functions that allow another developer
-    to add or remove files from this hashmap so they can customize it to their needs. In our case, we import
-    our own files from the mockedData class. This hashmap is then instantiated in REPLInput and passed into
-    the respective functions through being a type in the REPLFunction interface. The functions can then access
-    the file they need from the hashmap to run their command.
+    The files (mocked data) are accessed through MockedDataMap, which contains a hashmap linking filepaths to
+    string[][] holding our data. These string[][] mimic the format of the data received from Server. This map ins instantiated in REPLInput and passed into the necessary functions through the REPLFunction interface.
+
+## Design
+
+    We used currying to optimize our program. When the submit button is clicked, it calls the
+    handleSubmit method which then calls the respective command by getting it from the CommandMap.
+    Getting the function from the CommandMap by using the command the user passed in as a key, constituted currying
+    and simplifies our program.
+
+    The CommandMap stores REPLFunctions, because all functions must implement REPLFunction to access shared states and work within our command box. The REPLFunction interface, and insertion/deletion functions of the CommandMap
+    also allow other developers to customize commands as they wish, satisfying User Story 6.
+
+    Similarly, the insertion/deletion features of the MockedDataMap allow for more developer freedom (in case they wish
+    to use our mocked data in testing).
 
 # Errors/Bugs
 

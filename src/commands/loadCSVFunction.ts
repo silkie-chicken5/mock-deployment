@@ -6,6 +6,7 @@ import {REPLFunction} from './REPLFunction.js'
  * to load it in. If the file path is accepted, then it will set the loadedFile constant
  * to the file just loaded in. If the file path is not accepted then it will provide the
  * error on why it was not accepted.
+ * 
  * @param args - arg passed in is file name
  * @param fileMap - hashMap of the file name and file content
  * @param loadedFile - the file that is currently loaded

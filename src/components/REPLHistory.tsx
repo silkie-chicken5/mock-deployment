@@ -1,11 +1,27 @@
 import '../styles/main.css';
-//Interface type passed into argument type of REPLHistory, this ensures that the necessary arguments are
-//passed into the function
+
+
+/**
+ * This is the REPLHistory component. It handles formatting command history and retrieved data into tables,
+ * and displaying the history on the website.
+ */
+
+/**
+ * Interface type passed into argument type of REPLHistory, this ensures that the necessary arguments are
+ * passed into the function.
+ */
 interface REPLHistoryProps{
     history: (string | string[][])[][]
     briefMode: boolean
 }
-//This is a helper function to format each command that is currently in the history array
+
+/**
+ * A helper function to format each command that is currently in the history array.
+ * 
+ * @param command the command inputted on the website
+ * @param briefMode whether the history should be displayed in brief mode or not
+ * @returns a div containing the command history up until now in either brief or verbose mode
+ */
 function tableGenerator(command: string | string[][], briefMode: boolean){
     //if the argument passed in is a string then just need paragraph tags
     if (typeof command === "string"){
@@ -58,6 +74,7 @@ function tableGenerator(command: string | string[][], briefMode: boolean){
  * This function turns the history array passed in into HTML code to display the history on the
  * website. In it, it checks if the responses should be brief or verbose. It also calls a helper
  * function called tableGenerator() to help display the history in the correct format.
+ * 
  * @param props - of type REPLHistoryProps
  * @returns - HTML code for displaying the history
  */

@@ -4,6 +4,7 @@ import {REPLFunction} from './REPLFunction.js'
  * This is the viewCSVFuntion. It checks if no arguments were passed in and if there is a non-empty
  * file loaded in. If it passes this, then it returns the loaded file that is currently loaded in.
  * This output will be converted into a HTML table in REPLHistory.
+ * 
  * @param args - should be no passed in arguments
  * @param fileMap - hashMap of the file name and file content
  * @param loadedFile - the file that is currently loaded

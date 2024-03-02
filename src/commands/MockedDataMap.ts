@@ -11,20 +11,38 @@ import {mockedData} from '../data/mockedData';
 export class MockedDataMap {
     //this creates the hashmap used to map a file to its file contents
     private hashMap: { [key: string]: string[][] } = {};
-    //this is a get method to get a file from the hashmap
+    
+    /**
+     * Gets a file from the hashmap according to the filename
+     * 
+     * @param string name of the file
+     */ 
     getFile(fileName: string): string[][] {
         return this.hashMap[fileName];
     }
-    //this method adds a file and its content to the file map
+
+    /**
+     * Adds a file and its content to the hashmap
+     * 
+     * @param fileName the name of the file
+     * @param file the data (the actual file)
+     */
     addFile(fileName: string, file: string[][]) {
         this.hashMap[fileName] = file;
     }
-    //this method removes a file from the file map
+
+    /**
+     * Removes a file from the file map
+     * 
+     * @param fileName the name of the file
+     */
     removeFile(fileName: string) {
         delete this.hashMap[fileName];
     }
-    //this method adds the default files that is used in this program. It gets the file from 
-    //the mockedData file
+    
+    /**
+     * Adds all the default files for the Mock project.
+     */
     addDefaultFiles() {
         this.hashMap['data/simpleData.csv'] = mockedData('simpleData');
         this.hashMap['data/headerData.csv'] = mockedData('headerData')
@@ -33,8 +51,17 @@ export class MockedDataMap {
         this.hashMap['data/malformedData.csv'] = mockedData('malformedData');
         this.hashMap['data/repeatedData.csv'] = mockedData('repeatedData');
     }
-    //this is the mockSearch method which mocks what our backend search would return
-    //it takes in a column identifer and a value to search for
+    
+    /**
+     * Performs a "mocked search" depending on the arguments passed in through the search command.
+     * Manually checks for inputs and returns the necessary outputs (instead of actually searching
+     * through a file.)
+     * 
+     * @param column the column header or index
+     * @param value the value to search for
+     * @param loadedFile the file that has been loaded
+     * @returns an informative string message or data as a string[][]
+     */
     mockSearch(column: string, value: string, loadedFile: string[][]): string | string[][]  {
         //format the string to remove excess spaces and make it lower case
         let columnFormatted = column.trim().toLowerCase();
